@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.yoshino.masaki.dcgmanager.databinding.ActivityAddMatchesBinding
 import app.yoshino.masaki.dcgmanager.databinding.ActivityInfoBinding
+import app.yoshino.masaki.dcgmanager.MyApplication.Companion.gameList
+import app.yoshino.masaki.dcgmanager.MyApplication.Companion.fragmentList
 
 class InfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInfoBinding
@@ -18,7 +20,7 @@ class InfoActivity : AppCompatActivity() {
         db = AppDatabase.getInstance(this.applicationContext)!!
         val MainIntent = Intent(this,MainActivity::class.java)
         val tabPosition = intent.getIntExtra("pI", 0)
-        val matchlist = db.matchesDao().getGmae(pagerAdapter.gameList[tabPosition])
+        val matchlist = db.matchesDao().getGmae(gameList[tabPosition])//pagerAdapter.
         matchlist.sortedBy { it.deck }
         val enemylist = matchlist.map { it.deck }.toList()
         val distinctlist = enemylist.distinct().toList()

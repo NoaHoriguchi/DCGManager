@@ -1,14 +1,18 @@
 package app.yoshino.masaki.dcgmanager
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.yoshino.masaki.dcgmanager.databinding.FirstFragmentBinding
 import app.yoshino.masaki.dcgmanager.databinding.SecondFragmentBinding
+import app.yoshino.masaki.dcgmanager.MyApplication.Companion.gameList
+import app.yoshino.masaki.dcgmanager.MyApplication.Companion.fragmentList
 
 class SecondFragment : Fragment(){
 
@@ -20,7 +24,29 @@ class SecondFragment : Fragment(){
             fragment.setArguments(args)
             return fragment
         }
+        fun getInstance(tabName: String): SecondFragment {
+            val thisSecondFragment = SecondFragment()
+            val titleToDisplay = tabName
+            thisSecondFragment.setTitleText(titleToDisplay)
+            return thisSecondFragment
+        }
+        fun getNewInstance(nextPosition: Int): SecondFragment {
+            val thisSecondFragment = SecondFragment()
+            val titleToDisplay = gameList[nextPosition]
+            val args = Bundle()
+            args.putString("name_tab", titleToDisplay)
+            thisSecondFragment.setArguments(args)
+            return thisSecondFragment
+        }
+
+        fun getNewInstance2(nextPosition: Int): SecondFragment {
+            val thisSecondFragment = SecondFragment()
+            val titleToDisplay = gameList[nextPosition]
+            thisSecondFragment.setTitleText(titleToDisplay)
+            return thisSecondFragment
+        }
     }
+
 
 
     private lateinit var binding: FirstFragmentBinding
@@ -41,6 +67,8 @@ class SecondFragment : Fragment(){
     var firstList = listOf(true)
 
     var winList = listOf(true)
+
+    var titleToDisplay = "String"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,5 +95,13 @@ class SecondFragment : Fragment(){
         recyclerView = binding.recyclerView
         recyclerView.adapter = RecyclerAdapter(deckList,firstListUpdated,winListUpdated)
         recyclerView.layoutManager = LinearLayoutManager(activity)
+    }
+    fun setTitleText(title: String) {
+        titleToDisplay = title
+    }
+
+    override fun onDestroy() {
+        Log.d("gamelist", "DESTROYED")
+        super.onDestroy()
     }
 }

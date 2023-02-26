@@ -10,6 +10,8 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import app.yoshino.masaki.dcgmanager.databinding.ActivityAddMatchesBinding
+import app.yoshino.masaki.dcgmanager.MyApplication.Companion.gameList
+import app.yoshino.masaki.dcgmanager.MyApplication.Companion.fragmentList
 
 class AddMatchesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddMatchesBinding
@@ -25,13 +27,13 @@ class AddMatchesActivity : AppCompatActivity() {
         //val gameList = pagerAdapter.gameList
 
         //val gameList = ArrayList(pagerAdapter?.gameList)
-        val matchlist = db.matchesDao().getGmae(pagerAdapter.gameList[tabPosition])
+        val matchlist = db.matchesDao().getGmae(gameList[tabPosition])//pagerAdapter.
         matchlist.sortedBy { it.deck }
         val enemylist = matchlist.map { it.deck }.toList()
         val distinctlist = enemylist.distinct().toList()
 
         val spinner = findViewById<Spinner>(R.id.spinner_game)
-        val arrayAdapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,pagerAdapter.gameList)
+        val arrayAdapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,gameList)//pagerAdapter.
         val spinnerenemy = findViewById<Spinner>(R.id.spinner_enemy)
         val enemyAdapter = ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, distinctlist)
         spinner.adapter = arrayAdapter
