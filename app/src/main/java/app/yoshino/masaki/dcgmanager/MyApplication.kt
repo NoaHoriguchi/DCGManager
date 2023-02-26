@@ -11,7 +11,7 @@ class MyApplication: Application() {
         // initialization code here
     }
     companion object {
-        var gameList: MutableList<String> = arrayListOf("hunter","MRC","noa")
+        var gameList: MutableList<String> = arrayListOf("Game1","Game2","Game3")
         var fragmentList: MutableList<Fragment> = arrayListOf(SecondFragment.newInstance("hunter"),SecondFragment.newInstance("MRC"), SecondFragment.newInstance("noa"))
         lateinit var instance: MyApplication
         private set
