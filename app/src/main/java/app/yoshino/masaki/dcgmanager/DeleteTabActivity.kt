@@ -22,6 +22,10 @@ class DeleteTabActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try{
+            this.supportActionBar!!.hide()
+        }catch (e: NullPointerException){
+        }
         binding =
             ActivityDeleteTabBinding.inflate(layoutInflater).apply { setContentView(this.root) }
         db = AppDatabase.getInstance(this.applicationContext)!!

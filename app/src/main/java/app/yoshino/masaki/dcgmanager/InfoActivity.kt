@@ -16,6 +16,10 @@ class InfoActivity : AppCompatActivity() {
     var pagerAdapter = ViewPagerAdapter(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try{
+            this.supportActionBar!!.hide()
+        }catch (e: NullPointerException){
+        }
         binding = ActivityInfoBinding.inflate(layoutInflater).apply{setContentView(this.root)}
         db = AppDatabase.getInstance(this.applicationContext)!!
         val MainIntent = Intent(this,MainActivity::class.java)

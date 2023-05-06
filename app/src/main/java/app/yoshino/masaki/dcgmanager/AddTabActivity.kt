@@ -15,6 +15,10 @@ class AddTabActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        try{
+            this.supportActionBar!!.hide()
+        }catch (e: NullPointerException){
+        }
         binding = ActivityAddTabBinding.inflate(layoutInflater).apply { setContentView(this.root) }
         vpa = ViewPagerAdapter(this)
         ma = MainActivity()
